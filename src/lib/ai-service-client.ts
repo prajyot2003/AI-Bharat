@@ -11,8 +11,8 @@
  * Requirements: 9.1–9.9, 14.2–14.4, 15.9
  */
 
-const API_GATEWAY_URL = process.env.NEXT_PUBLIC_API_GATEWAY_URL || '';
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY || '';
+const API_GATEWAY_URL = process.env.NEXT_PUBLIC_API_GATEWAY_URL || 'https://ku6tibtn3b.execute-api.us-east-1.amazonaws.com/v1';
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'ByphovN0iV1RoXonTa04c32fc9eAZNms73M2S8hQ';
 
 export interface ChatRequest {
     message: string;
