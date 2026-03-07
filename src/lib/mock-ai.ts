@@ -16,19 +16,22 @@ export interface PathNode {
 
 export async function generateAIResponse(userMessage: string, history: Message[] = []): Promise<string> {
     try {
-        const response = await fetch('/api/gemini', {
+        const messages = history.map(msg => ({ role: msg.role, content: msg.content }));
+        messages.push({ role: "user", content: userMessage });
+
+        const response = await fetch('https://text.pollinations.ai/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: userMessage }),
+            body: JSON.stringify({ messages, model: "openai" }),
         });
 
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
+        if (!response.ok) throw new Error("API responded with an error");
 
-        console.log("✅ Served by Google Gemini");
-        return data.result;
+        const text = await response.text();
+        console.log("✅ Served by Free Pollinations.ai API");
+        return text;
     } catch (error) {
-        console.error("❌ Gemini request failed:", error);
+        console.error("❌ Free AI request failed:", error);
         throw new Error("Unable to connect to AI service. Please try again later.");
     }
 }
@@ -40,17 +43,19 @@ export async function generateLearningPath(goal: string): Promise<PathNode[]> {
         [{"title": "string", "description": "string", "type": "article", "xp": 100}]
         Do not include markdown blocks or any other text.`;
 
-        const response = await fetch('/api/gemini', {
+        const response = await fetch('https://text.pollinations.ai/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: prompt }),
+            body: JSON.stringify({
+                messages: [{ role: "user", content: prompt }],
+                model: "openai"
+            }),
         });
 
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
+        if (!response.ok) throw new Error("API responded with an error");
 
         // Try to parse out the JSON string safely
-        const text = data.result;
+        const text = await response.text();
         const jsonMatch = text.match(/\[[\s\S]*\]/);
         let steps = [];
         if (jsonMatch) {
@@ -68,7 +73,7 @@ export async function generateLearningPath(goal: string): Promise<PathNode[]> {
             xp: s.xp || 100,
         }));
     } catch (error) {
-        console.error("❌ Gemini learning path failed:", error);
+        console.error("❌ Free AI learning path failed:", error);
         throw new Error("Unable to generate learning path. Please try again later.");
     }
 }
