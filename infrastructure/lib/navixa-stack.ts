@@ -423,7 +423,6 @@ export class NavixaStack extends cdk.Stack {
           'Content-Type', 'X-Amz-Date', 'Authorization',
           'X-Api-Key', 'X-Amz-Security-Token', 'X-Amz-User-Agent',
         ],
-        allowCredentials: true,
         maxAge: cdk.Duration.hours(1),
       },
       endpointConfiguration: { types: [apigateway.EndpointType.REGIONAL] },
