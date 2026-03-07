@@ -1,0 +1,44 @@
+{
+  "name": "navixa-infrastructure",
+  "version": "1.0.0",
+  "description": "AWS CDK infrastructure for Navixa career guidance application",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "deploy": "cdk deploy",
+    "deploy:dev": "cdk deploy --context environment=development",
+    "deploy:prod": "cdk deploy --context environment=production",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "destroy": "cdk destroy",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "aws",
+    "cdk",
+    "infrastructure"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/source-map-support": "^0.5.10",
+    "@vitest/ui": "^4.0.18",
+    "aws-cdk": "^2.170.0",
+    "esbuild": "^0.27.3",
+    "fast-check": "^4.5.3",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.170.0",
+    "constructs": "^10.0.0"
+  }
+}

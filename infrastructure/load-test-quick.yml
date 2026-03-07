@@ -1,0 +1,55 @@
+config:
+  target: "{{ $processEnvironment.API_URL }}"
+  phases:
+    - duration: 10
+      arrivalRate: 5
+      rampTo: 20
+      name: "Warm up phase"
+    - duration: 20
+      arrivalRate: 20
+      name: "Sustained load phase"
+  defaults:
+    headers:
+      x-api-key: "{{ $processEnvironment.API_KEY }}"
+      Content-Type: "application/json"
+  payload:
+    - path: "queries.csv"
+      fields:
+        - "query"
+        - "model"
+  ensure:
+    p95: 5000
+    maxErrorRate: 1
+
+scenarios:
+  - name: "Chat Interaction"
+    weight: 5
+    flow:
+      - post:
+          url: "/api/v1/chat/message"
+          json:
+            prompt: "{{ query }}"
+            sessionId: "load-test-session-{{ $randomNumber(1, 1000) }}"
+            model: "{{ model }}"
+            action: "career_advice"
+
+  - name: "RAG Query"
+    weight: 3
+    flow:
+      - post:
+          url: "/api/v1/rag/query"
+          json:
+            query: "{{ query }}"
+            userId: "load-test-user-{{ $randomNumber(1, 1000) }}"
+            maxResults: 3
+
+  - name: "Agent Analysis"
+    weight: 2
+    flow:
+      - post:
+          url: "/api/v1/agent/analyze"
+          json:
+            userId: "load-test-user-{{ $randomNumber(1, 1000) }}"
+            action: "analyze-skills"
+            context:
+              targetRole: "{{ query }}"

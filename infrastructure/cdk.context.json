@@ -1,0 +1,28 @@
+{
+  "environments": {
+    "development": {
+      "account": "652744875047",
+      "region": "us-east-1",
+      "stackName": "NavixaStack-Dev",
+      "bedrockRegion": "us-east-1",
+      "apiThrottleRate": 100,
+      "apiThrottleBurst": 200,
+      "lambdaMemorySize": 512,
+      "dynamoDbBillingMode": "PAY_PER_REQUEST",
+      "enableXRayTracing": true,
+      "logRetentionDays": 7
+    },
+    "production": {
+      "account": "652744875047",
+      "region": "us-east-1",
+      "stackName": "NavixaStack-Prod",
+      "bedrockRegion": "us-east-1",
+      "apiThrottleRate": 1000,
+      "apiThrottleBurst": 2000,
+      "lambdaMemorySize": 1024,
+      "dynamoDbBillingMode": "PAY_PER_REQUEST",
+      "enableXRayTracing": true,
+      "logRetentionDays": 30
+    }
+  }
+}
