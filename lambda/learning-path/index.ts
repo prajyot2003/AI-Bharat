@@ -254,7 +254,7 @@ First step status must be "unlocked", rest must be "locked". XP per step: 100-30
         };
 
         const result = await bedrockClient.send(new InvokeModelCommand({
-            modelId: 'anthropic.claude-3-5-sonnet-20241022-v2:0',
+            modelId: 'us.anthropic.claude-3-5-sonnet-20241022-v2:0',
             contentType: 'application/json',
             accept: 'application/json',
             body: JSON.stringify(requestBody),

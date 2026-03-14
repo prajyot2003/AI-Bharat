@@ -195,9 +195,13 @@ export class NavixaStack extends cdk.Stack {
       effect: iam.Effect.ALLOW,
       actions: ['bedrock:InvokeModel', 'bedrock:InvokeModelWithResponseStream'],
       resources: [
+        // Foundation model ARNs
         `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0`,
-        `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0`,
+        `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0`,
         `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/amazon.titan-embed-text-v1`,
+        // Cross-region inference profile ARNs (required for Claude 3.5 models)
+        `arn:aws:bedrock:${this.config.bedrockRegion}:${this.account}:inference-profile/us.anthropic.claude-3-5-sonnet-20241022-v2:0`,
+        `arn:aws:bedrock:${this.config.bedrockRegion}:${this.account}:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0`,
       ],
     }));
 

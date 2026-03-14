@@ -68,10 +68,10 @@ interface APIGatewayResponse {
   body: string;
 }
 
-// Model ID mapping
+// Model ID mapping (must use cross-region inference profile IDs for claude-3-5 models)
 const MODEL_IDS: Record<string, string> = {
-  'claude-3.5-sonnet': 'anthropic.claude-3-5-sonnet-20241022-v2:0',
-  'claude-3.5-haiku': 'anthropic.claude-3-5-sonnet-20241022-v2:0',
+  'claude-3.5-sonnet': 'us.anthropic.claude-3-5-sonnet-20241022-v2:0',
+  'claude-3.5-haiku': 'us.anthropic.claude-3-5-haiku-20241022-v1:0',
 };
 
 // Default model parameters
