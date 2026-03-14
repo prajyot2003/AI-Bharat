@@ -56,7 +56,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
         fc.asyncProperty(
           fc.constantFrom('chat', 'generate'),
           fc.string({ minLength: 1, maxLength: 100 }), // Reduced max length
-          fc.constantFrom('claude-3-sonnet', 'claude-3-haiku'),
+          fc.constantFrom('claude-3.5-sonnet', 'claude-3.5-haiku'),
           async (action, prompt, model) => {
             // Reset mocks for each iteration
             bedrockMock.reset();
@@ -97,9 +97,9 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
             expect(body.model).toBe(model);
             
             // Property: Correct model ID must be used
-            const expectedModelId = model === 'claude-3-sonnet'
-              ? 'anthropic.claude-3-sonnet-20240229-v1:0'
-              : 'anthropic.claude-3-haiku-20240307-v1:0';
+            const expectedModelId = model === 'claude-3.5-sonnet'
+              ? 'anthropic.claude-3-5-sonnet-20241022-v2:0'
+              : 'anthropic.claude-3-5-sonnet-20241022-v2:0';
             
             expect(bedrockCalls[0].args[0].input.modelId).toBe(expectedModelId);
           }
@@ -113,7 +113,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
       
       await fc.assert(
         fc.asyncProperty(
-          fc.constantFrom('claude-3-sonnet', 'claude-3-haiku'),
+          fc.constantFrom('claude-3.5-sonnet', 'claude-3.5-haiku'),
           fc.string({ minLength: 1, maxLength: 200 }),
           fc.option(fc.record({
             temperature: fc.double({ min: 0, max: 1 }),
@@ -215,7 +215,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
               userId: 'test-user',
               messages: previousMessages,
               context: {},
-              model: 'claude-3-sonnet',
+              model: 'claude-3.5-sonnet',
               ttl: Math.floor(Date.now() / 1000) + 7776000,
             };
             
@@ -235,7 +235,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
               body: JSON.stringify({
                 action: 'chat',
                 prompt: newPrompt,
-                model: 'claude-3-sonnet',
+                model: 'claude-3.5-sonnet',
                 sessionId,
               }),
             };
@@ -269,7 +269,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
       await fc.assert(
         fc.asyncProperty(
           fc.string({ minLength: 1, maxLength: 100 }), // Reduced from 200
-          fc.constantFrom('claude-3-sonnet', 'claude-3-haiku'),
+          fc.constantFrom('claude-3.5-sonnet', 'claude-3.5-haiku'),
           async (prompt, model) => {
             bedrockMock.reset();
             dynamoMock.reset();
@@ -360,7 +360,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
               body: JSON.stringify({
                 action: 'chat',
                 prompt,
-                model: 'claude-3-sonnet',
+                model: 'claude-3.5-sonnet',
               }),
             };
             
@@ -407,7 +407,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
           fc.record({
             action: fc.option(fc.constantFrom('chat', 'generate'), { nil: undefined }),
             prompt: fc.option(fc.string({ minLength: 1, maxLength: 100 }), { nil: undefined }),
-            model: fc.option(fc.constantFrom('claude-3-sonnet', 'claude-3-haiku'), { nil: undefined }),
+            model: fc.option(fc.constantFrom('claude-3.5-sonnet', 'claude-3.5-haiku'), { nil: undefined }),
           }).filter(req => !req.action || !req.prompt || !req.model), // Ensure at least one field is missing
           async (invalidRequest) => {
             bedrockMock.reset();
@@ -469,7 +469,7 @@ describe('Property-Based Tests: Bedrock Request Lambda', () => {
               body: JSON.stringify({
                 action: 'chat',
                 prompt,
-                model: 'claude-3-sonnet',
+                model: 'claude-3.5-sonnet',
               }),
             };
             

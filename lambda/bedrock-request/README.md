@@ -26,7 +26,7 @@ This Lambda function implements the following requirements:
 {
   "action": "chat" | "generate",
   "prompt": "User message or generation prompt",
-  "model": "claude-3-sonnet" | "claude-3-haiku",
+  "model": "claude-3.5-sonnet" | "claude-3.5-haiku",
   "sessionId": "optional-session-id",
   "parameters": {
     "temperature": 0.7,
@@ -41,7 +41,7 @@ This Lambda function implements the following requirements:
 ```typescript
 {
   "content": "AI-generated response",
-  "model": "claude-3-sonnet",
+  "model": "claude-3.5-sonnet",
   "usage": {
     "inputTokens": 150,
     "outputTokens": 300

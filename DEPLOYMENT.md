@@ -99,8 +99,8 @@ npm run dev
 ## Bedrock Model Access
 
 You must request access to these models in the AWS Console → Bedrock → Model Access:
-- `anthropic.claude-3-haiku-20240307-v1:0` (for chat and RAG)
-- `anthropic.claude-3-sonnet-20240229-v1:0` (for learning paths and complex queries)
+- `anthropic.claude-3-5-sonnet-20241022-v2:0` (for chat and RAG)
+- `anthropic.claude-3-5-sonnet-20241022-v2:0` (for learning paths and complex queries)
 
 ## Deploy Commands
 

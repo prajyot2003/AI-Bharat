@@ -209,8 +209,8 @@ describe('Property 8: CDK Infrastructure Deployment', () => {
                   ],
                   Effect: 'Allow',
                   Resource: cdk.assertions.Match.arrayWith([
-                    cdk.assertions.Match.stringLikeRegexp('.*claude-3-sonnet.*'),
-                    cdk.assertions.Match.stringLikeRegexp('.*claude-3-haiku.*'),
+                    cdk.assertions.Match.stringLikeRegexp('.*claude-3.5-sonnet.*'),
+                    cdk.assertions.Match.stringLikeRegexp('.*claude-3.5-haiku.*'),
                   ]),
                 }),
                 // Bedrock Knowledge Base permissions

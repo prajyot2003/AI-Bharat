@@ -61,7 +61,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Hello',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -70,7 +70,7 @@ describe('Bedrock Request Lambda Handler', () => {
 
       expect(response.statusCode).toBe(200);
       expect(body.content).toBe('Hello! How can I help you today?');
-      expect(body.model).toBe('claude-3-sonnet');
+      expect(body.model).toBe('claude-3.5-sonnet');
       expect(body.usage.inputTokens).toBe(10);
       expect(body.usage.outputTokens).toBe(20);
       expect(body.sessionId).toBeDefined();
@@ -78,7 +78,7 @@ describe('Bedrock Request Lambda Handler', () => {
       // Verify Bedrock was called with correct model ID
       const bedrockCalls = bedrockMock.commandCalls(InvokeModelCommand);
       expect(bedrockCalls.length).toBe(1);
-      expect(bedrockCalls[0].args[0].input.modelId).toBe('anthropic.claude-3-sonnet-20240229-v1:0');
+      expect(bedrockCalls[0].args[0].input.modelId).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
     });
 
     it('should use default Sonnet parameters when not specified', async () => {
@@ -98,7 +98,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -129,7 +129,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
           parameters: {
             temperature: 0.9,
             maxTokens: 1500,
@@ -166,7 +166,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Quick question',
-          model: 'claude-3-haiku',
+          model: 'claude-3.5-haiku',
         }),
       };
 
@@ -174,10 +174,10 @@ describe('Bedrock Request Lambda Handler', () => {
       const body = JSON.parse(response.body);
 
       expect(response.statusCode).toBe(200);
-      expect(body.model).toBe('claude-3-haiku');
+      expect(body.model).toBe('claude-3.5-haiku');
 
       const bedrockCalls = bedrockMock.commandCalls(InvokeModelCommand);
-      expect(bedrockCalls[0].args[0].input.modelId).toBe('anthropic.claude-3-haiku-20240307-v1:0');
+      expect(bedrockCalls[0].args[0].input.modelId).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
     });
 
     it('should use default Haiku parameters', async () => {
@@ -197,7 +197,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-haiku',
+          model: 'claude-3.5-haiku',
         }),
       };
 
@@ -223,7 +223,7 @@ describe('Bedrock Request Lambda Handler', () => {
           { role: 'assistant', content: 'AI stands for Artificial Intelligence.', timestamp: Date.now() - 500 },
         ],
         context: {},
-        model: 'claude-3-sonnet',
+        model: 'claude-3.5-sonnet',
         ttl: Math.floor(Date.now() / 1000) + 7776000,
       };
 
@@ -243,7 +243,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Tell me about machine learning',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
           sessionId: 'test-session-123',
         }),
       };
@@ -286,7 +286,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Hi',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -314,7 +314,7 @@ describe('Bedrock Request Lambda Handler', () => {
           { role: 'assistant', content: 'First response', timestamp: Date.now() - 4000 },
         ],
         context: { topic: 'career' },
-        model: 'claude-3-sonnet',
+        model: 'claude-3.5-sonnet',
         ttl: Math.floor(Date.now() / 1000) + 7776000,
       };
 
@@ -334,7 +334,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Second message',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
           sessionId: 'test-session-456',
         }),
       };
@@ -376,7 +376,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -400,7 +400,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -424,7 +424,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -459,7 +459,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -483,7 +483,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -506,7 +506,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -529,7 +529,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -551,7 +551,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -568,7 +568,7 @@ describe('Bedrock Request Lambda Handler', () => {
       const event = {
         body: JSON.stringify({
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -583,7 +583,7 @@ describe('Bedrock Request Lambda Handler', () => {
       const event = {
         body: JSON.stringify({
           action: 'chat',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -626,7 +626,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -656,7 +656,7 @@ describe('Bedrock Request Lambda Handler', () => {
         body: JSON.stringify({
           action: 'chat',
           prompt: 'Test',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 
@@ -670,7 +670,7 @@ describe('Bedrock Request Lambda Handler', () => {
       const event = {
         body: JSON.stringify({
           action: 'chat',
-          model: 'claude-3-sonnet',
+          model: 'claude-3.5-sonnet',
         }),
       };
 

@@ -195,8 +195,8 @@ export class NavixaStack extends cdk.Stack {
       effect: iam.Effect.ALLOW,
       actions: ['bedrock:InvokeModel', 'bedrock:InvokeModelWithResponseStream'],
       resources: [
-        `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0`,
-        `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0`,
+        `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0`,
+        `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0`,
         `arn:aws:bedrock:${this.config.bedrockRegion}::foundation-model/amazon.titan-embed-text-v1`,
       ],
     }));
@@ -461,7 +461,7 @@ export class NavixaStack extends cdk.Stack {
         required: ['prompt', 'model'],
         properties: {
           prompt: { type: apigateway.JsonSchemaType.STRING, minLength: 1 },
-          model: { type: apigateway.JsonSchemaType.STRING, enum: ['claude-3-sonnet', 'claude-3-haiku'] },
+          model: { type: apigateway.JsonSchemaType.STRING, enum: ['claude-3.5-sonnet', 'claude-3.5-haiku'] },
           sessionId: { type: apigateway.JsonSchemaType.STRING },
           action: { type: apigateway.JsonSchemaType.STRING },
         },

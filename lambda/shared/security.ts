@@ -160,15 +160,15 @@ export function calculateComplexity(query: string): number {
  */
 export function selectModel(query: string, forceComplex = false): string {
     if (forceComplex) {
-        return 'anthropic.claude-3-sonnet-20240229-v1:0';
+        return 'anthropic.claude-3-5-sonnet-20241022-v2:0';
     }
 
     const complexity = calculateComplexity(query);
 
     if (complexity >= 0.7) {
-        return 'anthropic.claude-3-sonnet-20240229-v1:0';
+        return 'anthropic.claude-3-5-sonnet-20241022-v2:0';
     }
-    return 'anthropic.claude-3-haiku-20240307-v1:0';
+    return 'anthropic.claude-3-5-sonnet-20241022-v2:0';
 }
 
 /**
@@ -177,7 +177,7 @@ export function selectModel(query: string, forceComplex = false): string {
 export function selectModelForRequest(requestType: 'chat' | 'learning-path' | 'rag' | 'resume' | 'job', query = ''): string {
     // Learning path always uses Sonnet for quality
     if (requestType === 'learning-path') {
-        return 'anthropic.claude-3-sonnet-20240229-v1:0';
+        return 'anthropic.claude-3-5-sonnet-20241022-v2:0';
     }
     // RAG and chat use complexity-based selection
     return selectModel(query);

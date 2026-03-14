@@ -17,7 +17,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'ByphovN0iV1RoXonTa04c32fc9eA
 export interface ChatRequest {
     message: string;
     sessionId?: string;
-    model?: 'claude-3-sonnet' | 'claude-3-haiku';
+    model?: 'claude-3.5-sonnet' | 'claude-3.5-haiku';
 }
 
 export interface ChatResponse {
@@ -136,7 +136,7 @@ export async function sendChatMessage(request: ChatRequest): Promise<ChatRespons
         apiFetch<ChatResponse>('/api/v1/chat/message', 'POST', {
             action: 'chat',
             prompt: request.message,
-            model: request.model || 'claude-3-haiku',
+            model: request.model || 'claude-3.5-haiku',
             sessionId: request.sessionId,
         })
     );

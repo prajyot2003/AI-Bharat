@@ -14,8 +14,8 @@ This document summarizes the IAM role configuration for Navixa Lambda functions 
 ### 1. Amazon Bedrock Permissions
 
 #### Model Invocation (bedrock:InvokeModel)
-- **Claude 3 Sonnet:** `anthropic.claude-3-sonnet-20240229-v1:0`
-- **Claude 3 Haiku:** `anthropic.claude-3-haiku-20240307-v1:0`
+- **Claude 3 Sonnet:** `anthropic.claude-3-5-sonnet-20241022-v2:0`
+- **Claude 3 Haiku:** `anthropic.claude-3-5-sonnet-20241022-v2:0`
 - **Titan Embeddings:** `amazon.titan-embed-text-v1`
 
 **Actions:**

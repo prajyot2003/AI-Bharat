@@ -242,7 +242,7 @@ interface JobAnalysis {
 interface BedrockRequestEvent {
   action: 'chat' | 'generate';
   prompt: string;
-  model: 'claude-3-sonnet' | 'claude-3-haiku';
+  model: 'claude-3.5-sonnet' | 'claude-3.5-haiku';
   sessionId?: string;
   parameters?: {
     temperature?: number;
@@ -438,9 +438,9 @@ interface LearningPathResponse {
 ```typescript
 function selectModel(requestType: string, complexity: number): string {
   if (requestType === 'learning-path' || complexity > 0.7) {
-    return 'anthropic.claude-3-sonnet-20240229-v1:0';
+    return 'anthropic.claude-3-5-sonnet-20241022-v2:0';
   }
-  return 'anthropic.claude-3-haiku-20240307-v1:0';
+  return 'anthropic.claude-3-5-sonnet-20241022-v2:0';
 }
 ```
 
@@ -1234,7 +1234,7 @@ describe('Bedrock Request Lambda', () => {
     const event = {
       action: 'chat',
       prompt: 'What skills do I need for a data scientist role?',
-      model: 'claude-3-sonnet',
+      model: 'claude-3.5-sonnet',
       sessionId: 'test-session-123'
     };
     
@@ -1244,7 +1244,7 @@ describe('Bedrock Request Lambda', () => {
     expect(response.body).toContain('content');
     expect(mockBedrock.invokeModel).toHaveBeenCalledWith(
       expect.objectContaining({
-        modelId: 'anthropic.claude-3-sonnet-20240229-v1:0'
+        modelId: 'anthropic.claude-3-5-sonnet-20241022-v2:0'
       })
     );
   });
@@ -1604,7 +1604,7 @@ describe('Model Selection', () => {
     
     const model = selectModel('chat', complexity);
     
-    expect(model).toBe('anthropic.claude-3-haiku-20240307-v1:0');
+    expect(model).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
   });
   
   it('should use Claude 3 Sonnet for complex reasoning', async () => {
@@ -1613,7 +1613,7 @@ describe('Model Selection', () => {
     
     const model = selectModel('learning-path', complexity);
     
-    expect(model).toBe('anthropic.claude-3-sonnet-20240229-v1:0');
+    expect(model).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
   });
 });
 ```

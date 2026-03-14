@@ -27,7 +27,7 @@ const CHAT_SESSIONS_TABLE = process.env.CHAT_SESSIONS_TABLE || 'navixa-chat-sess
 interface BedrockRequestEvent {
   action: 'chat' | 'generate';
   prompt: string;
-  model: 'claude-3-sonnet' | 'claude-3-haiku';
+  model: 'claude-3.5-sonnet' | 'claude-3.5-haiku';
   sessionId?: string;
   parameters?: {
     temperature?: number;
@@ -70,18 +70,18 @@ interface APIGatewayResponse {
 
 // Model ID mapping
 const MODEL_IDS: Record<string, string> = {
-  'claude-3-sonnet': 'anthropic.claude-3-sonnet-20240229-v1:0',
-  'claude-3-haiku': 'anthropic.claude-3-haiku-20240307-v1:0',
+  'claude-3.5-sonnet': 'anthropic.claude-3-5-sonnet-20241022-v2:0',
+  'claude-3.5-haiku': 'anthropic.claude-3-5-sonnet-20241022-v2:0',
 };
 
 // Default model parameters
 const DEFAULT_PARAMETERS = {
-  'claude-3-sonnet': {
+  'claude-3.5-sonnet': {
     temperature: 0.7,
     maxTokens: 2048,
     topP: 0.9,
   },
-  'claude-3-haiku': {
+  'claude-3.5-haiku': {
     temperature: 0.5,
     maxTokens: 1024,
     topP: 0.9,
@@ -203,7 +203,7 @@ async function invokeBedrock(
 
   // Get model parameters
   const modelParams = {
-    ...(DEFAULT_PARAMETERS[model as keyof typeof DEFAULT_PARAMETERS] || DEFAULT_PARAMETERS['claude-3-sonnet']),
+    ...(DEFAULT_PARAMETERS[model as keyof typeof DEFAULT_PARAMETERS] || DEFAULT_PARAMETERS['claude-3.5-sonnet']),
     ...parameters,
   };
 

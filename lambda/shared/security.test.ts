@@ -133,14 +133,14 @@ describe('Model Selection – Property 26', () => {
 
             simpleQueries.forEach(q => {
                 const model = selectModel(q);
-                expect(model).toBe('anthropic.claude-3-haiku-20240307-v1:0');
+                expect(model).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
             });
 
             complexQueries.forEach(q => {
                 const complexity = calculateComplexity(q);
                 expect(complexity).toBeGreaterThanOrEqual(0.7);
                 const model = selectModel(q);
-                expect(model).toBe('anthropic.claude-3-sonnet-20240229-v1:0');
+                expect(model).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
             });
         });
 
@@ -148,7 +148,7 @@ describe('Model Selection – Property 26', () => {
             fc.assert(
                 fc.property(fc.string({ maxLength: 200 }), (query: string) => {
                     const model = selectModelForRequest('learning-path', query);
-                    expect(model).toBe('anthropic.claude-3-sonnet-20240229-v1:0');
+                    expect(model).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
                 }),
                 { numRuns: 20 }
             );
@@ -159,8 +159,8 @@ describe('Model Selection – Property 26', () => {
                 fc.property(fc.string({ maxLength: 500 }), (query: string) => {
                     const model = selectModel(query);
                     expect([
-                        'anthropic.claude-3-sonnet-20240229-v1:0',
-                        'anthropic.claude-3-haiku-20240307-v1:0',
+                        'anthropic.claude-3-5-sonnet-20241022-v2:0',
+                        'anthropic.claude-3-5-sonnet-20241022-v2:0',
                     ]).toContain(model);
                 }),
                 { numRuns: 30 }
@@ -192,7 +192,7 @@ describe('Model Selection – Property 26', () => {
             fc.assert(
                 fc.property(fc.string({ maxLength: 200 }), (query: string) => {
                     const model = selectModel(query, true);
-                    expect(model).toBe('anthropic.claude-3-sonnet-20240229-v1:0');
+                    expect(model).toBe('anthropic.claude-3-5-sonnet-20241022-v2:0');
                 }),
                 { numRuns: 20 }
             );
